@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PushNotificationsService } from './push.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'app';
+  public title: string = 'Browser Push Notifications!';
+
+  constructor(private pushService: PushNotificationsService) {
+    if (pushService.isSupported()) {
+      pushService.requestNotificationPermission();
+    }
+  }
 }
